@@ -12,10 +12,12 @@ type Post struct {
 }
 type PostDao struct {
 }
+
 var (
-	postDao *PostDao
-	postOnce sync.Once
+	postDao  *PostDao
+	postOnce sync.Once //
 )
+
 func NewPostDaoInstance() *PostDao {
 	postOnce.Do(
 		func() {
@@ -23,6 +25,8 @@ func NewPostDaoInstance() *PostDao {
 		})
 	return postDao
 }
+
+//PostDao无成员变量，有唯一的成员函数
 func (*PostDao) QueryPostsByParentId(parentId int64) []*Post {
 	return postIndexMap[parentId]
 }
